@@ -1,12 +1,11 @@
 class Chiffrement1():
 
-    keyLeft = "ALZBHGUWIEFJCDYNMQRVKPTOXS"
-    keyRight = "TWXLPRDZMNUGSAQKJHEBCIFYVO"
-
-    def __init__(self):
+    def __init__(self, keyLeft, keyRight):
         
-        self.keyLeft = Chiffrement1.keyLeft
-        self.keyRight = Chiffrement1.keyRight
+        self.keyLeft = keyLeft
+        self.keyRight = keyRight
+        self.InitialKeyLeft = keyLeft
+        self.InitialKeyRight = keyRight
 
 
 
@@ -90,8 +89,8 @@ class Chiffrement1():
             self.shift_key("right")
 
         # Once done, make sure the left and right keys are the same as initial
-        self.keyLeft = Chiffrement1.keyLeft
-        self.keyRight = Chiffrement1.keyRight
+        self.keyLeft = self.InitialKeyLeft
+        self.keyRight = self.InitialKeyRight
 
         return encode_msg
     
@@ -113,8 +112,8 @@ class Chiffrement1():
             self.shift_key("right") 
 
         # Once done, make sure the left and right keys are the same as initial
-        self.keyLeft = Chiffrement1.keyLeft
-        self.keyRight = Chiffrement1.keyRight
+        self.keyLeft = self.InitialKeyLeft
+        self.keyRight = self.InitialKeyRight
 
         return decode_msg
 
@@ -122,6 +121,32 @@ class Chiffrement1():
 
 if __name__ == "__main__":
 
-    cypher = Chiffrement1()
+    # Example with default keys and message
 
-    print(cypher.decode("PJMNEAJFCDJPMXVMTAQUARKNPZDMWOSEOLMQBGBZTGPTHUHYSOVDLXEYAPUYYNLKAWETEBMLAWBFFPDGVKGKUBTRYDJIVEACLBYVLOLRJROQCHMQHSILAKWJCNDLQSXBOMNKFXSFKDGVDLCWQYDNLH"))
+    keyLeft = "ALZBHGUWIEFJCDYNMQRVKPTOXS"
+    keyRight = "TWXLPRDZMNUGSAQKJHEBCIFYVO"
+
+    cypher = Chiffrement1(keyLeft, keyRight)
+
+    lisible = cypher.decode("PJMNEAJFCDJPMXVMTAQUARKNPZDMWOSEOLMQBGBZTGPTHUHYSOVDLXEYAPUYYNLKAWETEBMLAWBFFPDGVKGKUBTRYDJIVEACLBYVLOLRJROQCHMQHSILAKWJCNDLQSXBOMNKFXSFKDGVDLCWQYDNLH")
+    print("Decoded message : ", lisible)
+
+
+    # Example with custom keys and message
+    leftkey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    rightkey = "ZYXWVUTSRQPONMLKJIHGFEDCBA"
+
+    cypher2 = Chiffrement1(leftkey, rightkey)
+
+    illisible = cypher.encode("JESUISZIGGSUNYORDLEFOUQUIADORELESHEXPLOSIFSETPARCOURSLESMONTAGNESENCHANTANTDESCHANTSDEGUERREAVECDESBOMBESPLEINLESPOCHESETUNGRANDSOURIRESURLEVISAGECARJEMEFOUDESDANGERSJEFAISSAUTERTOUTCEQUIBOUGEMESAMISDISENTQUEJESUISUNPEUFOUMAISJESUISJUSTEPASSIONNEPARLESDETONATIONSETLECHAOSCREATIFQUIENDECOULE")
+    lisible = cypher.decode(illisible)
+
+    print("Encoded message : ", illisible)
+    print("Decoded message : ", lisible)
+
+
+    # Reponses aux questions :  
+    # 1. Il s'agit d'un chiffrement de type substitution polyalphabétique, car il permet d'encoder une même lettre de 2 manières différentes. Par ailleurs, il s'agit d'un chiffrement symétrique, car il utilise la même clé pour le chiffrement et le déchiffrement.
+    # 2. Considérant que la clé est constitué de deux chaines de 26 caractères distincts, il y a 26! * 26! combinaisons possibles.
+    # 3. La sécurité de ce chiffrement est plutôt forte car il y a beaucoup de combinaisons possibles. Il est difficile de casser ce chiffrement, ne serait-ce qu'a cause de la présence de 2 clés.
+    # 4. Ce chiffrement est plus sécurisé qu'un simple chiffrement de César, car il utilise deux clés différentes et permet de chiffrer une même lettre de plusieurs manières différentes. Cependant, il reste vulnérable de par sa nature symétrique. 
