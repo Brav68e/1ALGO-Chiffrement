@@ -30,8 +30,8 @@ C’est un chiffrement par transposition, car il ne modifie pas les lettres du m
 
 2. Quel nombre de clés peut-on constituer ?
 La clé est composée de deux entiers : n (≥ 2) et offset (entre 0 et 2n−3).
-Pour chaque n, il y a 2n−2 valeurs possibles d'offset. Donc, si on limite n à une valeur maximale N, on aurait :
-Nombre total de clés = somme de 2n−2 pour n de 2 à N.
+Pour chaque n, il y a 2n−3 valeurs possibles d'offset. Donc, si on limite n à une valeur maximale N, on aurait :
+Nombre total de clés = somme de 2n−3 pour n de 2 à N.
 
 3. Que pensez-vous de la sécurité de cet algorithme ?
 Elle est faible pour des usages modernes : un attaquant peut facilement essayer toutes les petites combinaisons possibles de n et offset, surtout si le texte chiffré est court. Ce chiffrement ne résiste pas à une attaque par force brute ou à une analyse fréquentielle.
